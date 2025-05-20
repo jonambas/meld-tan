@@ -1,13 +1,8 @@
+/// <reference types="vinxi/types/client" />
 import { hydrateRoot } from "react-dom/client";
-import { RouterProvider, createRouter } from "@tanstack/react-router";
-import { routeTree } from "./routeTree.gen";
+import { StartClient } from "@tanstack/react-start";
+import { createRouter } from "./router";
 
-const router = createRouter({ routeTree });
+const router = createRouter();
 
-declare module "@tanstack/react-router" {
-  interface Register {
-    router: typeof router;
-  }
-}
-
-hydrateRoot(document, <RouterProvider router={router} />);
+hydrateRoot(document, <StartClient router={router} />);

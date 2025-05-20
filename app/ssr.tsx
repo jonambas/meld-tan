@@ -1,9 +1,12 @@
-import { renderToString } from "react-dom/server";
-import { RouterProvider, createRouter } from "@tanstack/react-router";
-import { routeTree } from "./routeTree.gen";
+import {
+  createStartHandler,
+  defaultStreamHandler,
+} from "@tanstack/react-start/server";
+import { getRouterManifest } from "@tanstack/react-start/router-manifest";
 
-export function render(url: string) {
-  const router = createRouter({ routeTree });
-  const html = renderToString(<RouterProvider router={router} />);
-  return { html };
-}
+import { createRouter } from "./router";
+
+export default createStartHandler({
+  createRouter,
+  getRouterManifest,
+})(defaultStreamHandler);
